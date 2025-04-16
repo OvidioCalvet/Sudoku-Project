@@ -1,4 +1,6 @@
 class Board:
 
     def __init__(self):
-        pass
+        x = 2
+        print (x)
+
