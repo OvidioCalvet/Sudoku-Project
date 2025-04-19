@@ -8,7 +8,7 @@
 - Ovidio Calvet
 - Mateo Bedoya
 - Chloe Leandor
-- Lia
+- Lia Issakov
 
 ## Roles & Responsibilities:
 - Ovidio:
