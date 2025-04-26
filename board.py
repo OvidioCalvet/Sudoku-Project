@@ -1,6 +1,6 @@
 from pygame import *
 from sudoku_generator import generate_sudoku
-
+from cell import *
 class Board:
 
     def __init__(self, width, height, screen, difficulty):
@@ -24,11 +24,21 @@ class Board:
         for row in range(9):
             self.cells.append([])
             for col in range(9):
-                values = self.board_values[row][col]
-                cell = Cell(values,row,col,screen)
+                value = self.board_values[row][col]
+                cell = Cell(value,row,col,screen)
                 self.cells[row].append(cell)
 
         self.selected = None
 
     def draw(self):
-        pass
+
+        self.screen.fill((255, 255, 255))
+        cell_size = 60
+        for row in range(9):
+            for col in range(9):
+                self.cells[row][col].draw()
+        #         x = col * cell_size
+        #         y = row * cell_size
+        #         pygame.draw.rect(self.screen, (200, 200, 200), (x, y, cell_size, cell_size), 1)
+        #
+        # pygame.display.update()
