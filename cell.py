@@ -4,6 +4,7 @@ import pygame
 class Cell:
 
     def __init__(self, value, row, col, screen):
+
         self.value = value
         self.sketched_value = 0  # temp value shown before confirmation
         self.row = row
@@ -36,4 +37,4 @@ class Cell:
             self.screen.blit(sketch, (x + 5, y + 5))
         # outlines cell in red
         if self.selected:
-            pygame.draw.rect(self.screen, (255, 0, 0), (x, y, cell_size, cell_size), 3)
+            pygame.draw.rect(self.screen, (247, 90, 90), (x, y, cell_size, cell_size), 3)
