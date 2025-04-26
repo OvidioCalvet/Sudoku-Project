@@ -41,7 +41,7 @@ class SudokuGenerator:
             return False
         if not self.valid_in_col(col, num):
             return False
-        if not self.valid_in_box(row, col, num)
+        if not self.valid_in_box(row, col, num):
             return False
         return True
 
