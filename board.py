@@ -1,6 +1,7 @@
 from pygame import *
 from sudoku_generator import generate_sudoku
 from cell import *
+
 class Board:
 
     def __init__(self, width, height, screen, difficulty):
@@ -17,7 +18,7 @@ class Board:
         else:
             removed = 50
 
-        self.board_values = generate_sudoku(9,removed)
+        self.board_values = generate_sudoku(9, removed)
 
         self.cells = []
 
@@ -31,7 +32,6 @@ class Board:
         self.selected = None
 
     def draw(self):
-
         self.screen.fill((255, 255, 255))
         cell_size = 60
         for row in range(9):
