@@ -1,40 +1,53 @@
 import pygame
+from final_variables import *
 
 
 class Cell:
 
-    def __init__(self, value, row, col, screen):
+    def __init__(self, value, row, col, screen, is_correct=True, filled=False): #default values for correct and filled so code works properly.
 
-        self.value = value
         self.sketched_value = 0  # temp value shown before confirmation
+        self.selected = False
+        self.value = value
         self.row = row
         self.col = col
         self.screen = screen
-        self.selected = False
+        self.is_correct = is_correct
+        self.filled = filled
 
     def set_cell_value(self, value):
-        self.value = value
+        if not self.filled:
+            self.value = value
 
     def set_sketched_value(self, value):
         self.sketched_value = value
 
     def draw(self):
-        # draws this cell, along with the value inside it
-        cell_size = 540 // 9
-        x = self.col * cell_size
-        y = self.row * cell_size
+        # set position
+        x = X_OFFSET + CELL_SIZE * self.col 
+        y = Y_OFFSET + CELL_SIZE * self.row
 
-        # Creates a font to draw the final value
-        font = pygame.font.SysFont("comicsans", 40)
+        # Create fonts
+        font = pygame.font.Font(None, 40)
+        sketch_font = pygame.font.Font(None, 25)
 
-        if self.value != 0:  # not 0 value is displayed
-            text = font.render(str(self.value), True, (0, 0, 0))
-            self.screen.blit(text, (x + 20, y + 10))
-
-        elif self.sketched_value != 0:  # displays sketched value
-            sketch_font = pygame.font.SysFont("comicsans", 25)
-            sketch = sketch_font.render(str(self.sketched_value), True, (128, 128, 128))
-            self.screen.blit(sketch, (x + 5, y + 5))
-        # outlines cell in red
+        # draw the regular border
+        pygame.draw.rect(self.screen, CELL_BORDER, (x, y, CELL_SIZE, CELL_SIZE), 2)
+        # draw the red outline if selected
         if self.selected:
-            pygame.draw.rect(self.screen, (247, 90, 90), (x, y, cell_size, cell_size), 3)
+            pygame.draw.rect(self.screen, OUTLINE_COLOR, (x, y, CELL_SIZE, CELL_SIZE), 2)
+
+        # draw the filled numbers
+        if self.value != 0:
+            # pre-filled stays TEXT_COLOR, user input is always grey
+            color = TEXT_COLOR if self.filled else (128, 128, 128)
+            num = font.render(str(self.value), True, color)
+            text_rectangle = num.get_rect(center=(x + CELL_SIZE//2, y + CELL_SIZE//2))
+            self.screen.blit(num, text_rectangle)
+
+        # 4) pencil mark if no permanent value
+        elif self.sketched_value != 0:
+            num = sketch_font.render(str(self.sketched_value), True, (120, 120, 120))
+            text_rectangle = num.get_rect(center=(x + CELL_SIZE//2, y + CELL_SIZE//2))
+            self.screen.blit(num, text_rectangle)
+
