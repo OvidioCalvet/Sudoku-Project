@@ -2,8 +2,6 @@
 
 ## Preview
 
- <! a gif of our working project will be inserted here >
-
 ## Group:
 - Ovidio Calvet
 - Mateo Bedoya
